@@ -1,18 +1,14 @@
-HTTP/1.1 200 OK
+# 1. Server version disclosure
 
-Server: nginx/1.29.5
+**Observation:**
+The HTTP response reveals the exact server version:
+`Server: nginx/1.29.5`
 
-Date: Sat, 14 Feb 2026 20:59:13 GMT
+**Risk Explanaion:**
+Exposing the exact server version allows potential attackers to identify known vulnerabilities associated with this specific version. This reduces the attackers reconnaissance effort and may increase the likelihood of targeted exploitation.
 
-Content-Type: text/html
+**Risk Version**: Low to Medium
 
-Content-Length: 615
-
-Last-Modified: Wed, 04 Feb 2026 15:12:20 GMT
-
-Connection: keep-alive
-
-ETag: "698361d4-267"
-
-Accept-Ranges: bytes
+**Recommandation**:
+Disable or minimize server version disclosure by adjusting the server configuration (e.g., using `server_tokens off` in nginx)
 
