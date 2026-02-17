@@ -30,3 +30,25 @@ Implement a restrict Content Security Policy. For example:
 Content Security Policy: default-src 'self';
 This configuration restricts all resource loading to the same origin, reducing the risk of executing malicious external scripts.
 
+# 3. Missing HTTP Strict Transport Security (HSTP)
+
+**Observation:**
+The HTTP response does not include a `Strict-Transport-Security` header.
+The application is currently accessible via HTTP without enforced HTTPs redirection.
+
+**Risk Explanation:**
+Without HSTS, users may initially connect over HTTP. This alows attackers to perform downgrade attacks or man-in-the-middle (MITM) attacks, potentially intercepting or modifying sensitive data.
+
+**Impact:**
+Sensitive information such as authentication cookies or session tokens could be exposed if transmitted over unsecured HTTP connections.
+
+**Risk Level:** Medium to High
+
+**Recommendation:**
+Enable HTTPS and configure HSTS to enforce secure communication. For example:
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+In nginx, this can be implemented using:
+add_header Strict-Transort-Security "max-age=3156000; includeSubDomains" always;
+This ensures that browsers only communicate over HTTPS, preventing protocol downgrade and man-in-the-middle attacks.
+
