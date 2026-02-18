@@ -1,2 +1,51 @@
-# Web-system-security
-This project focuses on analyzing web system security configurations based on industry best practices. The goals is to identify potential risks caused by missing or misconfigurated security settings, and to demonstrate a structured, configuration-oriented security analysis approach.
+# Security Configuration Analysis - Nginx in Docker
+
+## Project Overview
+The project demonstrates a basic security configuration analysis of an Nginx web server deployed inside a Docker container.
+The objective is to identify common misconfigurations in HTTP response headers.
+
+## Environment Setup
+- Host: Windows 10
+- Docker Desktop
+- Nginx official image
+- Port mapping: 8080 -> 80
+
+## Scope of Analysis
+The analysis focuses on HTTP security headers and configuration related risks, including:
+- Server version disclosure
+- Content Security Policy (CSP)
+- HTTP Strict Transport Security (HSTS)
+
+The Docker container is used as a deployment environment. The analysis targets web server configuration rather than container level security.
+## Key Findings
+1. Server Version Disclosure - Low to Medium Risk
+2. Missing Content Security Policy - Medium to High Risk
+3. Missing HSTS - Medium to High Risk
+## Risk Summary
+The assessment reveals that while system functions correctly, several security best practices are not implemented.
+Missing browser enforced security mechanisms increase the potential impact of client side attack.
+
+## Future Improvements
+- Implement HTTPS with valid TLS certificate
+- Configure strict CSP rules
+- Enable HSTS with preload consideration
+- Expand analysis to container hardening
+
+
+HTTP/1.1 200 OK
+
+Server: nginx/1.29.5
+
+Date: Sat, 14 Feb 2026 20:59:13 GMT
+
+Content-Type: text/html
+
+Content-Length: 615
+
+Last-Modified: Wed, 04 Feb 2026 15:12:20 GMT
+
+Connection: keep-alive
+
+ETag: "698361d4-267"
+
+Accept-Ranges: bytes
