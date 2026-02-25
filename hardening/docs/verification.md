@@ -63,12 +63,46 @@ Expected Result
 ```
 X-Content-Type-Options: nosniff
 X-Frame-Options: DENY
-X-XSS-Protection: 1; mode=block
 Referrer-Policy: no-referrer
 Content-Security-Policy: default-src 'self';
 Strict-Transport-Security: max-age=31536000; includeSubDomains
 ```
-Purpose
+Purpose:
+```
+- MIME sniffing attacks
+- Clickjacking
+- Information Leakage via Referrer
+- Unauthorized External Resource Loading
 ```
 
+### 4. Server Version Disclosure Mitigation
+Command
+
+```bash
+curl.exe -I http://localhost:8080
+curl.exe -Ik https://localhost:8443
 ```
+Expected Result:
+```
+Server: nginx
+```
+Purpose:
+```
+This confirmed that server_tokens off successfully hides detailed server version information, reducing reconnaissance value for attackers.
+```
+
+### 5. HSTS Enforcement
+```bash
+curl.exe -Ik https://localhost:8443
+```
+Expected Result:
+```
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+```
+Purpose:
+```
+HSTS ensures browsers always use HTTPS after the first secure connetion, preventing SSL stripping attacks.
+```
+
+## Conclusion
+All contols were validated and effectively reduce the attack surface of the deployed Nginx container.
